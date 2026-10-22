@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Card from "./Card.jsx";
+import Card from "./Card";
 
 /* const cards = [
   { name: "Dragão de Cobalto", type: "Criatura", attack: 7, defense: 5 },
@@ -9,11 +9,6 @@ import Card from "./Card.jsx";
   { name: "Eco do Vazio", type: "Feitiço", attack: 0, defense: 0 },
 ]; */
 
-
-const cards = [
-
-];
-
 function App() {
   const [cards, setCards] = useState([]);
   const [filter, setFilter] = useState("Todas");
@@ -21,10 +16,11 @@ function App() {
   const [randomCard, setRandomCard] = useState(null);
   const [sorted, setSorted] = useState(false);
 
+
   useEffect(() => {
     fetch("http://localhost3000/api/cartas")
       .then((res) => res.json)
-      .then((data) => setCards(data));
+      .then((data) => { setCards(data); });
   }, []);
 
 
