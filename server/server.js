@@ -52,6 +52,8 @@ app.get("/api/cartas", (req, res) => {
 });
 
 
+
+
 app.get("/cartas", (req, res) => {
   const items = cards
     .map((card) => `<li><b>${card.name}</b> — ${card.type}, ataque ${card.attack}</li>`)

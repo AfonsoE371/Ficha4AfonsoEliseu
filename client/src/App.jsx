@@ -7,6 +7,8 @@ function App() {
   const [search, setSearch] = useState("");
   const [randomCard, setRandomCard] = useState(null);
   const [sorted, setSorted] = useState(false);
+  const [wait, setWait] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:3000/api/cartas")
@@ -14,9 +16,12 @@ function App() {
 
         return res.json();
       })
+
       .then((data) => {
         setCards(data);
       })
+      .catch((error) => { console.error("Erro ao carregar cartas:", error), setError(error) })
+      .finally(() => { setWait(false) });
 
   }, []);
 
@@ -45,6 +50,10 @@ function App() {
       <p>
         Tenho {cards.length} cartas · a mostrar {visible.length}
       </p>
+
+      {wait && <p>Loading Cards...</p>}
+      {error && <p>Error Loading Cards..</p>}
+
 
       <div>
         <button onClick={() => setFilter("Todas")}>
